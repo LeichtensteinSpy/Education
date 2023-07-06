@@ -9,6 +9,11 @@ app = FastAPI()
 
 @app.get('/get')
 async def get() -> dict:
+"""Return message.
+
+Returns: dict with message
+
+"""
     return {'message': 'Wake up, Tim!'}
 
 
