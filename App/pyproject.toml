@@ -4,10 +4,9 @@ version = "0.1.0"
 description = ""
 authors = ["Roostique <mannapovr@sigma-geophys.com>"]
 readme = "README.md"
-packages = [{include = "for_tim"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "3.8.12"
 fastapi = "^0.99.1"
 uvicorn = "^0.22.0"
 

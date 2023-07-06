@@ -9,11 +9,11 @@ app = FastAPI()
 
 @app.get('/get')
 async def get() -> dict:
-"""Return message.
+    """Return message.
 
-Returns: dict with message
+    Returns: dict with message
 
-"""
+    """
     return {'message': 'Wake up, Tim!'}
 
 
@@ -24,4 +24,3 @@ if __name__ == '__main__':
         host='0.0.0.0',
         port=3789
     )
-    
