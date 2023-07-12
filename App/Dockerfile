@@ -1,17 +1,15 @@
-FROM debian:bullseye-slim
+FROM ghcr.io/artcode-kazan/python:3.8.12
 
-WORKDIR /App
+RUN apt-get -y update
 
-COPY . .
+WORKDIR /service
 
-RUN apt-get -y update && apt-get -y install python3-pip && apt-get -y install python3
-
-RUN pip3 install poetry && poetry update
+COPY ./pyproject.toml .
 
 RUN poetry install --only main
 
-RUN pip3 install uvicorn && pip3 install fastapi
+COPY ./project .
 
-CMD ["python3", "project/main.py"]
+ENTRYPOINT ["python3.8", "main.py"]
 
 EXPOSE 3789
