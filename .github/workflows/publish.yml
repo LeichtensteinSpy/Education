@@ -10,6 +10,6 @@
         - uses: actions/checkout@v3
         - name: Build and push the image
           run: |
-            docker login --username leichtensteinspy --password ${{ secrets.GITHUB_TOKEN }} ghcr.io
+            docker login --username leichtensteinspy --password ${{ secrets.SECRET_NAME }} ghcr.io
             docker build . --tag ghcr.io/leichtensteinspy/docker-solving:latest
             docker push ghcr.io/leichtensteinspy/docker-solving:latest
