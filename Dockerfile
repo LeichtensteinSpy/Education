@@ -2,7 +2,7 @@ FROM ghcr.io/artcode-kazan/python:3.8.12
 
 WORKDIR /service
 
-COPY pyproject.toml .
+COPY Education/pyproject.toml .
 
 RUN poetry install 
 
