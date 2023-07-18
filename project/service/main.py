@@ -1,5 +1,7 @@
 """Main module."""
 
+import os
+
 import uvicorn
 from fastapi import FastAPI
 from service.connection import create_connection
@@ -55,6 +57,6 @@ if __name__ == '__main__':
     uvicorn.run(
         'main:app',
         reload=True,
-        host='0.0.0.0',
-        port=3789
+        host=os.getenv('APP_HOST'),
+        port=int(os.getenv('APP_PORT'))
     )
