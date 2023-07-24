@@ -21,6 +21,9 @@ services:
             retries: 4
             start_period: 2s
             timeout: 10s
+        networks:
+            new-networks:
+                ipv4_address: 172.20.0.3             
 
     fast-api:
         build:
@@ -41,3 +44,15 @@ services:
             POSTGRES_PORT: 5432
             APP_HOST: fast-api
             APP_PORT: 5478
+        networks:
+            new-networks:
+                ipv4_address: 172.20.0.5
+
+networks:
+    new-networks:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.0.0/16
+                  gateway: 172.20.0.1
