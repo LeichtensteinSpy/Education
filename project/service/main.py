@@ -4,7 +4,7 @@ import os
 
 import uvicorn
 from fastapi import FastAPI
-from service.connection import create_connection
+from connection import create_connection
 
 app = FastAPI()
 
