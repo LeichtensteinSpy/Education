@@ -6,7 +6,7 @@ services:
             context: ./dbase-service
             dockerfile: ./Dockerfile
         volumes:
-            - /Education:/project/dbase-service/postgres.sql
+            - /dbase-service:/postgres.sql
         ports:
             - "3789:5432"
         environment:
@@ -35,7 +35,7 @@ services:
             postgres:
                 condition: service_healthy
         volumes:
-            - /Education:/project/service/main.py
+            - /service:/main.py
         ports:
             - "5478:5478"
         environment:
