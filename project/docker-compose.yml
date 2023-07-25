@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+    postgres:
+        build:
+            context: ./dbase-service
+            dockerfile: ./Dockerfile
+        volumes:
+            - /dbase-service:/postgres.sql
+        ports:
+            - "3789:5432"
+        environment:
+            - POSTGRES_PASSWORD=Aspireone533
+            - POSTGRES_DB=test-dbase
+            - POSTGRES_USER=test-user
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+        healthcheck:
+            test: 
+                pg_isready -d test-dbase 
+                -h postgres -p 5432 -U test-user
+            interval: 6s
+            retries: 4
+            start_period: 2s
+            timeout: 10s
+        networks:
+            new-networks:
+                ipv4_address: 172.20.0.3             
+
+    fast-api:
+        build:
+            context: ./service
+            dockerfile: ./Dockerfile
+        depends_on: 
+            postgres:
+                condition: service_healthy
+        volumes:
+            - /service:/main.py
+        ports:
+            - "5478:5478"
+        environment:
+            - POSTGRES_PASSWORD=Aspireone533
+            - POSTGRES_DB=test-dbase
+            - POSTGRES_USER=test-user
+            - POSTGRES_HOST=postgres
+            - POSTGRES_PORT=5432
+            - APP_HOST=fast-api
+            - APP_PORT=5478
+        networks:
+            new-networks:
+                ipv4_address: 172.20.0.5
+
+networks:
+    new-networks:
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.0.0/16
+                  gateway: 172.20.0.1
